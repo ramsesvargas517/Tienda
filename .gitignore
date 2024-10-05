@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/static/Audio/Paulo Londra - Recién Soltera (Official Video).mp3
+/src/main/resources/static/Videos/videoplayback.mp4
