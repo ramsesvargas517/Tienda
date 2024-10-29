@@ -33,3 +33,4 @@ build/
 .vscode/
 /src/main/resources/static/Audio/Paulo Londra - Recién Soltera (Official Video).mp3
 /src/main/resources/static/Videos/videoplayback.mp4
+/src/main/resources/firebase/techshop-93b16-firebase-adminsdk-73g11-b65f5577ba.json
