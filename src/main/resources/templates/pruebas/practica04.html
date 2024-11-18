@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Consulta de Productos por Existencias - TechShop</title>
+</head>
+<body>
+
+    <div th:replace="~{layout/plantilla :: header}"></div> 
+
+    <!-- Sección para crear los filtros -->
+    <section th:fragment="filtros" class="bg-light">
+        <div class="container">
+            <div class="row justify-content-center py-2">
+                <div class="col-md-6">
+                    <form method="POST" th:action="@{/pruebas/consultaExistencias}" class="was-validated">
+                        <div class="card">                            
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="existenciasInf">Existencias Mínimas:</label>
+                                    <input type="number" class="form-control" id="existenciasInf" name="existenciasInf" 
+                                           th:value="${existenciasInf}" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="existenciasSup">Existencias Máximas:</label>
+                                    <input type="number" class="form-control" id="existenciasSup" name="existenciasSup" 
+                                           th:value="${existenciasSup}" required="true"/>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-check"></i> Consultar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección para mostrar los resultados -->
+    <section th:fragment="resultados" id="resultados">
+        <div class="container">
+            <h2>Resultados de la Consulta</h2>
+            <div th:if="${productos != null and !productos.empty}">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Precio</th>
+                            <th class="text-center">Existencias</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto, contador : ${productos}">
+                            <td class="text-center">[[${contador.count}]]</td>
+                            <td>[[${producto.descripcion}]]</td>
+                            <td class="text-end">[[${#numbers.formatDecimal(producto.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</td>
+                            <td class="text-center">[[${producto.existencias}]]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center p-2" th:if="${productos == null or productos.empty}">
+                <span>No se encontraron productos en este rango de existencias.</span>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="~{layout/plantilla :: footer}"></div> 
+
+</body>
+</html>

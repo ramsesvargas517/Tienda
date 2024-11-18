@@ -85,4 +85,23 @@ public class PruebasController {
         return "/pruebas/listado2";
     }
 
+    //practica04
+    @GetMapping("/practica04")
+    public String practicaListado(Model model) {
+        List<Producto> productos = productoService.getProductos(false);
+        model.addAttribute("productos", productos);
+        return "/pruebas/practicaListado";
+    }
+
+    @PostMapping("/consultaExistencias")
+    public String consultaExistencias(@RequestParam(value = "existenciasInf") int existenciasInf,
+            @RequestParam(value = "existenciasSup") int existenciasSup,
+            Model model) {
+        List<Producto> productos = productoService.findByExistenciasBetween(existenciasInf, existenciasSup);
+        model.addAttribute("productos", productos);
+        model.addAttribute("existenciasInf", existenciasInf); 
+        model.addAttribute("existenciasSup", existenciasSup); 
+        return "/pruebas/practica04";
+    }
+
 }

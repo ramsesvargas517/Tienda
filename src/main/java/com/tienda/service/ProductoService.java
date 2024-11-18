@@ -30,4 +30,8 @@ public interface ProductoService {
     public List<Producto> metodoJPQL(double precioInf, double precioSup);
 
     public List<Producto> metodoNativo(double precioInf, double precioSup);
+    
+    //practica04
+    
+   public List<Producto> findByExistenciasBetween(int existenciasInf, int existenciasSup);
 }
